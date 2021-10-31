@@ -45,7 +45,24 @@ class Keyboard {
         return $this->hattervilagitas;
     }
 
-    
+    public static function getAll() : array {
+        global $db;
+        $retArr = [];
+
+        $table = $db->query("SELECT * FROM keyboards ORDER BY listahoz_adva DESC")->fetchAll();
+
+        foreach($table as $row) {
+            $e = new Keyboard(new DateTime($row['listahoz_adva']),
+                                $row['nev'],
+                                $row['ar'],
+                                $row['mechanikus'],
+                                $row['hattervilagitas']);
+            $e->id = $row['id'];
+            $retArr[] = $e;
+        }
+
+        return $retArr;
+    }
 }
 
 ?>
