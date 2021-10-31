@@ -45,6 +45,31 @@ class Keyboard {
         return $this->hattervilagitas;
     }
 
+    public static function updateAt(Int $id,
+                                    String $ujNev,
+                                    Int $ujAr,
+                                    Boolean $ujMechanikus,
+                                    Boolean $ujHattervil) {
+        global $db;
+
+        $db->prepare("  UPDATE
+                        keyboards 
+                        SET 
+                        listahoz_adva = :ujListadv,
+                        nev = :ujNev,
+                        ar = :ujAr,
+                        mechanikus = :ujMechanikus,
+                        hattervilagitas = :ujHattervil
+                        WHERE 
+                        id = :id")
+            ->execute([ 'ujListadv' => new DateTime, 
+                        'ujNev' => $ujNev,
+                        'ujAr' => $ujAr, 
+                        'ujMechanikus' => $ujMechanikus, 
+                        'ujHattervil' => $ujHattervil, 
+                        'id' => $id]);
+    }
+
     public static function getAll() : array {
         global $db;
         $retArr = [];
