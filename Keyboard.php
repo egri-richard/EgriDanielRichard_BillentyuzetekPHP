@@ -11,8 +11,8 @@ class Keyboard {
     public function __construct(DateTime $listahoz_adva,
                                 String $nev,
                                 Int $ar,
-                                Boolean $mechanikus,
-                                Boolean $hattervilagitas) {
+                                Int $mechanikus,
+                                Int $hattervilagitas) {
                                     
         $this->listahoz_adva = $listahoz_adva;
         $this->nev = $nev;
@@ -25,7 +25,7 @@ class Keyboard {
         return $this->id;
     }
 
-    public function getListahoz_adva() : DateTime {
+    public function getListAdv() : DateTime {
         return $this->listahoz_adva;
     }
 
