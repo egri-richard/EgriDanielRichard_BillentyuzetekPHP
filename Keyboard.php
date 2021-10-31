@@ -32,6 +32,20 @@ class Keyboard {
     public function getNev() : String {
         return $this->nev;
     }
+
+    public function getAr() {
+        return $this->ar;
+    }
+
+    public function getMechanikus() {
+        return $this->mechanikus;
+    }
+
+    public function getHattervil() {
+        return $this->hattervilagitas;
+    }
+
+    
 }
 
 ?>
