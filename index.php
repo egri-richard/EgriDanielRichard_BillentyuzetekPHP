@@ -20,11 +20,11 @@
     foreach($data as $e) {
         echo '<div class="container">';
         echo '<h4 class="">'. $e->getNev() .'</h4>';
-        echo '<p>Ár: '. $e->getAr() .'</p>';
+        echo '<p>Ár: '. $e->getAr() .' Ft</p>';
         echo '<p>Mechanikus: '. $e->getMechanikus() .'</p>';
         echo '<p>Háttérviláítás: '. $e->getHattervil() .'</p>';
-        echo '<small class="text-muted">Listahoz adva: '. $e->getListAdv()->format('Y-m-d') .'</small>';
-        echo '<a href="editKeyboard.php">Szerkesztés</a>';
+        echo '<small class="text-muted">Listahoz adva: '. $e->getListAdv()->format('Y-m-d') .'</small><br>';
+        echo '<a href="editKeyboard.php?id='. $e->getId() .'">Szerkesztés</a>';
         echo '</div>';
     }
 

@@ -45,32 +45,18 @@ class Keyboard {
         return $this->hattervilagitas ? 'igen' : 'nem';
     }
 
-    public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMechanikus, Int $ujHattervil) {
+    public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMech, Int $ujHtv) {
         global $db;
 
-        $db->prepare("  UPDATE
-                        keyboards 
-                        SET 
-                        listahoz_adva = :ujListadv,
-                        nev = :ujNev,
-                        ar = :ujAr,
-                        mechanikus = :ujMechanikus,
-                        hattervilagitas = :ujHattervil
-                        WHERE 
-                        id = :id")
-            ->execute([ 'ujListadv' => new DateTime, 
-                        'ujNev' => $ujNev,
-                        'ujAr' => $ujAr, 
-                        'ujMechanikus' => $ujMechanikus, 
-                        'ujHattervil' => $ujHattervil, 
-                        'id' => $id]);
+        $db->prepare("UPDATE keyboards SET listahoz_adva = :ujListadv, nev = :ujNev, ar = :ujAr, mechanikus = :ujMechanikus, hattervilagitas = :ujHattervil WHERE id = :id")
+            ->execute([ 'ujListadv' => new DateTime, 'ujNev' => $ujNev, 'ujAr' => $ujAr, 'ujMechanikus' => $ujMech, 'ujHattervil' => $ujHtv, 'id' => $id]);
     }
 
     public static function getAll() : array {
         global $db;
         $retArr = [];
 
-        $table = $db->query("SELECT * FROM keyboards ORDER BY listahoz_adva DESC")->fetchAll();
+        $table = $db->query("SELECT * FROM keyboards ORDER BY listahoz_adva ASC")->fetchAll();
 
         foreach($table as $row) {
             $e = new Keyboard(new DateTime($row['listahoz_adva']),
