@@ -21,7 +21,7 @@ class Keyboard {
         $this->hattervilagitas = $hattervilagitas;
     }
 
-    public function getId() : int {
+    public function getId() : Int {
         return $this->id;
     }
 
@@ -33,23 +33,19 @@ class Keyboard {
         return $this->nev;
     }
 
-    public function getAr() {
+    public function getAr() : Int {
         return $this->ar;
     }
 
-    public function getMechanikus() {
-        return $this->mechanikus;
+    public function getMechanikus() : String {
+        return $this->mechanikus ? 'igen' : 'nem';
     }
 
-    public function getHattervil() {
-        return $this->hattervilagitas;
+    public function getHattervil() : String {
+        return $this->hattervilagitas ? 'igen' : 'nem';
     }
 
-    public static function updateAt(Int $id,
-                                    String $ujNev,
-                                    Int $ujAr,
-                                    Boolean $ujMechanikus,
-                                    Boolean $ujHattervil) {
+    public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMechanikus, Int $ujHattervil) {
         global $db;
 
         $db->prepare("  UPDATE
@@ -88,6 +84,8 @@ class Keyboard {
 
         return $retArr;
     }
+
+
 }
 
 ?>
