@@ -35,7 +35,7 @@
         echo '<p>Mechanikus: '. $e->getMechanikus() .'</p>';
         echo '<p>Háttérvilágítás: '. $e->getHattervil() .'</p>';
         echo '<small class="text-muted">Listahoz adva: '. $e->getListAdv()->format('Y-m-d') .'</small><br>';
-        echo '<a class="link-light" href="editKeyboard.php?id='. $e->getId() .'">Szerkesztés</a>';
+        echo '<a class="link-light" href="editKeyboard.php?id='. $e->getId() .'&name='. $e->getNev() .'">Szerkesztés</a>';
         echo '</div>';
         
     }

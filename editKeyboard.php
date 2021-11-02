@@ -2,6 +2,7 @@
     require_once 'db.php';
     require_once 'Keyboard.php';
 
+    $passedName = $_GET['name'] ?? null;
     $passedId = $_GET['id'] ?? null;
     $nevErr = false;
     $arErr = false;
@@ -54,7 +55,7 @@
 <body>
 
     <div class="container">
-        <h3><?php echo $passedId ?>. billentyűzet szerkesztése</h3>
+        <h3><?php echo $passedName ?> szerkesztése</h3>
     </div>
 
     <div class="container">
