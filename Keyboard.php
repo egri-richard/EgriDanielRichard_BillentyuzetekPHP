@@ -55,6 +55,13 @@ class Keyboard {
                                 ':htv' => $this->hattervilagitas]);
     }
 
+    public static function delete(Int $id) {
+        global $db;
+
+        $db->prepare("DELETE FROM keyboards WHERE id = :id")
+            ->execute([':id' => $id]);
+    } 
+
     public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMech, Int $ujHtv) {
         global $db;
         $date = date('Y-m-d H:i:s');
