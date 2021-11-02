@@ -39,7 +39,7 @@ class Keyboard {
     }
 
     public function getHattervil() : String {
-        return $this->hattervilagitas ? 'igen' : 'nem';
+        return $this->hattervilagitas ? 'van' : 'nincs';
     }
 
     public function insert() {
