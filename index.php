@@ -31,7 +31,7 @@
         echo '<input type="hidden" name="deleteId" value="' . $e->getId() . '">';
         echo '<h4 class="">'. $e->getNev() .'       <button id="delBtn" class="btn" type="submit" >X</button></h4>';
         echo '</form>';
-        echo '<p>Ár: '. $e->getAr() .' Ft</p>';
+        echo '<p>Ár: '. $e->getAr() .' Ft-tól</p>';
         echo '<p>Mechanikus: '. $e->getMechanikus() .'</p>';
         echo '<p>Háttérvilágítás: '. $e->getHattervil() .'</p>';
         echo '<small class="text-muted">Listahoz adva: '. $e->getListAdv()->format('Y-m-d') .'</small><br>';
