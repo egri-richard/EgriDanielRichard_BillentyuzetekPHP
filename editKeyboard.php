@@ -3,50 +3,43 @@
     require_once 'Keyboard.php';
 
     $passedId = $_GET['id'] ?? null;
-    $inputError = false;
+    $nevErr = false;
+    $arErr = false;
+    $mechErr = false;
+    $htvErr = false;
     
-    if($passedId === null) {
+    if($passedId == null) {
         header('Location: index.php');
         exit();
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nev = null;
-        $ar = null;
-        $mech = null;
-        $htv = null;
-
         if(empty($_POST['newNev'])) {
-            $inputError = true;
+            $nevErr = true;
         } else {
             $nev = $_POST['newNev'];
         }
 
         if(empty($_POST['newAr'])) {
-            $inputError = true;
+            $arErr = true;
         } else {
             $ar = $_POST['newAr'];
         }
 
-        if(empty($_POST['newMech'])) {
-            $inputError = true;
-        } else {
-            $mech = $_POST['newMech'];
+        $mech = $_POST['newMech'] ?? null;
+        if($mech == null) {
+            $mechErr = true;
         }
 
-        if(empty($_POST['newHtv'])) {
-            $inputError = true;
-        } else {
-            $htv = $_POST['newHtv'];
+        $htv = $_POST['newHtv'] ?? null;
+        if($htv == null) {
+            $htvErr = true;
         }
 
-        if( $nev != null &&
-            $ar != null &&
-            $mech != null &&
-            $htv != null) {
+        if(!$nevErr && !$arErr && !$mechErr && !$htvErr) {
                 Keyboard::updateAt($passedId, $nev, $ar, $mech, $htv);
                 header('Location: index.php');
-            }
+        }
     }
 
 ?><!DOCTYPE html>
@@ -59,27 +52,37 @@
     <title>Edit Selected Keyboard</title>
 </head>
 <body>
+
     <div class="container">
         <h3><?php echo $passedId ?>. billentyűzet szerkesztése</h3>
     </div>
+
     <div class="container">
+
         <form method="POST">
 
             <div class="container">
-                <label for="nev">Adja meg a megváltozott nevet: </label><input id="nev" name="newNev" type="text">
+                <label for="nev">Adja meg a megváltozott nevet: </label><input id="nev" name="newNev" type="text"><?php if($nevErr) echo "hiba"?>
                 <br>
-                <label for="ar">Adja meg a megváltozott árat:</label><input id="ar" name="newAr" type="number">
+                <label for="ar">Adja meg a megváltozott árat:</label><input id="ar" name="newAr" type="number"><?php if($arErr) echo "hiba"?>
             </div>
 
-            <label for="isMech">Mechanikus ?</label><div id="isMech" class="container">
-                <label for="mechIgen">Igen</label><input name="newMech" type="radio"><br>
-                <label for="mechNem">Nem</label><input name="newMech" type="radio">
-                // TODO: GET INT INSTEAD OF STRING 
+            <label for="isMech">Mechanikus ?</label><?php if($mechErr) echo " hiba" ?>
+            <div id="isMech" class="container">
+
+                <label for="mechIgen">Igen</label><input name="newMech" type="radio" value="1"><br>
+
+                <label for="mechNem">Nem</label><input name="newMech" type="radio" value="0">
+
             </div>
 
-            <label for="isHtv">Van háttérvilágítás ?</label><div id="isHtv" class="container">
-                <label for="htvIgen">Igen</label><input id="htvIgen" name="newHtv" type="radio"><br>
-                <label for="htvNem">Nem</label><input id="htvNem" name="newHtv" type="radio">
+            <label for="isHtv">Van háttérvilágítás ?</label><?php if($htvErr) echo " hiba" ?>
+            <div id="isHtv" class="container">
+
+                <label for="htvIgen">Igen</label><input id="htvIgen" name="newHtv" type="radio" value="1"><br>
+
+                <label for="htvNem">Nem</label><input id="htvNem" name="newHtv" type="radio" value="0">
+
             </div>
 
             <div class="container">
@@ -87,11 +90,7 @@
             </div>
 
         </form>
-        <?php
-                if($inputError) {
-                    echo '<h1>Ne hagyjon mezőt üresen!!/h1>';
-                }
-            ?>
+
     </div>
 </body>
 </html>

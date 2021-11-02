@@ -47,9 +47,10 @@ class Keyboard {
 
     public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMech, Int $ujHtv) {
         global $db;
+        $date = date('Y-m-d H:i:s');
 
         $db->prepare("UPDATE keyboards SET listahoz_adva = :ujListadv, nev = :ujNev, ar = :ujAr, mechanikus = :ujMechanikus, hattervilagitas = :ujHattervil WHERE id = :id")
-            ->execute([ 'ujListadv' => new DateTime, 'ujNev' => $ujNev, 'ujAr' => $ujAr, 'ujMechanikus' => $ujMech, 'ujHattervil' => $ujHtv, 'id' => $id]);
+            ->execute([ 'ujListadv' => $date, 'ujNev' => $ujNev, 'ujAr' => $ujAr, 'ujMechanikus' => $ujMech, 'ujHattervil' => $ujHtv, 'id' => $id]);
     }
 
     public static function getAll() : array {
