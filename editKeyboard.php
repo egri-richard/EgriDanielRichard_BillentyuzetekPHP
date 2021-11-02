@@ -60,33 +60,36 @@
     <div class="container">
 
         <form method="POST">
+                <div class="container d-grid gap-3">
+                    <label class="form-label" for="nev">Adja meg az új billentyűzet nevét: </label>
+                    <input class="form-control" id="nev" name="newNev" type="text">
+                    <?php if($nevErr) echo "hiba"?>
+
+                    <br>
+                    <label class="form-label" for="ar">Adja meg az új billentyűzet árát:</label>
+                    <input class="form-control" id="ar" name="newAr" type="number">
+                    <?php if($arErr) echo "hiba"?>
+
+                    <div id="isMech" class="container-fluid d-inline">
+                        <span>Mechanikus ?</span><?php if($mechErr) echo " HIBA" ?>
+
+                        <label class="form-check-label" for="mechIgen">Igen</label><input class="form-check-input" name="newMech" type="radio" value="1">
+
+                        <label class="form-check-label" for="mechNem">Nem</label><input class="form-check-input" name="newMech" type="radio" value="0">
+
+                    </div>
+
+                    <div id="isHtv" class="container-fluid d-inline">
+                        <span>Van háttérvilágítás ?</span><?php if($htvErr) echo " HIBA" ?>
+
+                        <label class="form-check-label" for="htvIgen">Igen</label><input class="form-check-input" id="htvIgen" name="newHtv" type="radio" value="1">
+
+                        <label class="form-check-label" for="htvNem">Nem</label><input class="form-check-input" id="htvNem" name="newHtv" type="radio" value="0">
+
+                    </div>
 
             <div class="container">
-                <label for="nev">Adja meg a megváltozott nevet: </label><input id="nev" name="newNev" type="text"><?php if($nevErr) echo "hiba"?>
-                <br>
-                <label for="ar">Adja meg a megváltozott árat:</label><input id="ar" name="newAr" type="number"><?php if($arErr) echo "hiba"?>
-            </div>
-
-            <label for="isMech">Mechanikus ?</label><?php if($mechErr) echo " hiba" ?>
-            <div id="isMech" class="container">
-
-                <label for="mechIgen">Igen</label><input name="newMech" type="radio" value="1"><br>
-
-                <label for="mechNem">Nem</label><input name="newMech" type="radio" value="0">
-
-            </div>
-
-            <label for="isHtv">Van háttérvilágítás ?</label><?php if($htvErr) echo " hiba" ?>
-            <div id="isHtv" class="container">
-
-                <label for="htvIgen">Igen</label><input id="htvIgen" name="newHtv" type="radio" value="1"><br>
-
-                <label for="htvNem">Nem</label><input id="htvNem" name="newHtv" type="radio" value="0">
-
-            </div>
-
-            <div class="container">
-                <input type="submit" value="Szerkesztés befejezése">
+                <input class="btn btn-primary" type="submit" value="Szerkesztés befejezése">
             </div>
 
         </form>

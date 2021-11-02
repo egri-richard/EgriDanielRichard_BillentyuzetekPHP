@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="container">
-                    <input class="btn btn-primary" type="submit" value="Szerkesztés befejezése">
+                    <input class="btn btn-primary" type="submit" value="Hozzáadás">
                 </div>
             </div>
         </form>
