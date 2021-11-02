@@ -8,13 +8,10 @@ class Keyboard {
     private $mechanikus;
     private $hattervilagitas;
 
-    public function __construct(DateTime $listahoz_adva,
-                                String $nev,
+    public function __construct(String $nev,
                                 Int $ar,
                                 Int $mechanikus,
                                 Int $hattervilagitas) {
-                                    
-        $this->listahoz_adva = $listahoz_adva;
         $this->nev = $nev;
         $this->ar = $ar;
         $this->mechanikus = $mechanikus;
@@ -45,6 +42,19 @@ class Keyboard {
         return $this->hattervilagitas ? 'igen' : 'nem';
     }
 
+    public function insert() {
+        global $db;
+        $date = date('Y-m-d H:i:s');
+
+        $db->prepare("  INSERT INTO keyboards (listahoz_adva, nev, ar, mechanikus, hattervilagitas)
+                        VALUES (:listadv, :nev, :ar, :mech, :htv)")
+                    ->execute([ ':listadv' => $date,
+                                ':nev' => $this->nev,
+                                ':ar' => $this->ar,
+                                ':mech' => $this->mechanikus,
+                                ':htv' => $this->hattervilagitas]);
+    }
+
     public static function updateAt(Int $id, String $ujNev, Int $ujAr, Int $ujMech, Int $ujHtv) {
         global $db;
         $date = date('Y-m-d H:i:s');
@@ -60,11 +70,11 @@ class Keyboard {
         $table = $db->query("SELECT * FROM keyboards ORDER BY listahoz_adva ASC")->fetchAll();
 
         foreach($table as $row) {
-            $e = new Keyboard(new DateTime($row['listahoz_adva']),
-                                $row['nev'],
+            $e = new Keyboard(  $row['nev'],
                                 $row['ar'],
                                 $row['mechanikus'],
                                 $row['hattervilagitas']);
+            $e->listahoz_adva = new DateTime($row['listahoz_adva']);
             $e->id = $row['id'];
             $retArr[] = $e;
         }
